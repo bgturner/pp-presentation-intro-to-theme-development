@@ -278,9 +278,10 @@ if ( have_posts() ) {
 
 * Hooks: Actions and Filters
 #+BEGIN_QUOTE
-Allow other code to "do stuff" at a certain place
+Allows /other/ code to "do stuff" at a certain place in the code
 #+END_QUOTE
 
+** We need to tell WordPress /where/ in our templates it can /do/ stuff.
 ** There are two missing pieces from our theme
    - =wp_head()=
    - =wp_footer()=
@@ -323,7 +324,7 @@ function wp_head() {
 }
 #+END_SRC
 
-   - [[https://developer.wordpress.org/reference/functions/wp_head/][Developer - wp_head()]]
+   - [[https://developer.wordpress.org/reference/functions/wp_head/][Developer - =wp_head()=]]
 ** =wp_footer()=
 
 #+BEGIN_SRC php
@@ -337,7 +338,7 @@ function wp_footer() {
 }
 #+END_SRC
 
-   - [[https://developer.wordpress.org/reference/functions/wp_footer/][Developer - wp_footer()]]
+   - [[https://developer.wordpress.org/reference/functions/wp_footer/][Developer - =wp_footer()=]]
 
 ** Actions and Filters Documentation
    - https://codex.wordpress.org/Plugin_API
@@ -373,16 +374,16 @@ add_action( 'wp_enqueue_scripts', 'pp_theme_dev_scripts' );
    :END:
 
 ** 
-   - [[https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts][Developer Hook - wp_enqueue_scripts]]
-   - [[https://developer.wordpress.org/reference/functions/wp_enqueue_style/][Developer Function - wp_enqueue_style()]]
-   - [[https://developer.wordpress.org/reference/functions/wp_enqueue_script/][Developer Function - wp_enqueue_script()]]
+   - [[https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts][Developer Hook - =wp_enqueue_scripts=]]
+   - [[https://developer.wordpress.org/reference/functions/wp_enqueue_style/][Developer Function - =wp_enqueue_style()=]]
+   - [[https://developer.wordpress.org/reference/functions/wp_enqueue_script/][Developer Function - =wp_enqueue_script()=]]
 
 * Template Files
   - [[https://developer.wordpress.org/themes/basics/template-files/][Developer Handbook - Template Files]]
 ** Template Files
    - Define how a site looks
    - Made up of HTML, Template Tags, and PHP code
-   - 
+
 ** index.php
    - The most important template file
    - A catch-all template that is used if a more specific template can't be found.
@@ -485,7 +486,6 @@ get_footer();
 * Template Hierarchy
   - How WordPress knows which template to load
 
-
   - [[https://developer.wordpress.org/themes/basics/template-hierarchy/][Theme Handbook - Template Hierarchy]]
 
 ** Remember how each request is a query?
@@ -498,6 +498,7 @@ get_footer();
 ** Example
    - On the homepage, we only want the title for each post.
    - On single blog posts, we want the post's meta information.
+   - But we want them both to use the same header and footer code.
 
 ** Add Two Templates
   #+BEGIN_SRC
@@ -506,13 +507,15 @@ get_footer();
   ├── single.php
   ├── style.css
   ├── functions.php
+  ├── header.php
+  ├── footer.php
   ├── index.php
   └── js/
     └── example.js
   #+END_SRC
 
-** Create Homepage Template
-   - Using =index.php= as a base
+** Homepage Template
+   - Use =index.php= as a base
 
 ** 
 #+BEGIN_SRC php
@@ -533,7 +536,7 @@ if ( have_posts() ) {
 get_footer();
 #+END_SRC
 
-** Create Single Post Template
+** Single Post Template
 #+BEGIN_SRC php
 <?php get_header(); ?>
 <h1>Intro to WP Theme Dev</h1>
@@ -573,6 +576,19 @@ get_footer();
    :PROPERTIES:
    :reveal_background: assets/images/wp-hierarchy.png
    :END:
+
+   - [[https://developer.wordpress.org/themes/basics/template-hierarchy/][Developer - Template Hierarchy]]
+
+** Example
+   - We want special treatment for posts that have the category of "Unicorns"
+   - =http://example.com/blog/category/unicorns=
+
+** 
+#+BEGIN_SRC 
+└── pp-theme-name
+  ├── category-unicorns.php
+  └── ...
+#+END_SRC
 
 * Resources
   - [[https://developer.wordpress.org/themes/][WordPress Theme Development Handbook]]
