@@ -1,4 +1,4 @@
-#+OPTIONS: num:nil toc:nil reveal_title_slide:nil org-html-htmlize-output-type:css
+#+OPTIONS: num:nil toc:nil reveal_title_slide:nil 
 #+REVEAL_ROOT: assets/reveal.js/
 #+REVEAL_TRANS: Fade
 #+REVEAL_THEME: none
@@ -58,7 +58,7 @@ I go to this link to get what I want.
 #+END_QUOTE
 
 ** Could we say?
-  - A single source of something 
+  - A single source of truth 
   - A place that a url links to for unique information
 
 * Query
@@ -66,44 +66,68 @@ I go to this link to get what I want.
    - We do this by accessing a URL in our browser
 
 ** =example.com/=
+   :PROPERTIES:
+   :CUSTOM_ID: request-homepage
+   :END:
+
 #+BEGIN_QUOTE
 Me - Hey WordPress, give me the homepage for the site.
+#+END_QUOTE
+#+BEGIN_QUOTE
 WP - Sure thing!
 #+END_QUOTE
 
 ** =example.com/contact=
+   :PROPERTIES:
+   :CUSTOM_ID: request-contact
+   :END:
+
 #+BEGIN_QUOTE
 Me - Hello WordPress! May I please have the contact page?
+#+END_QUOTE
+#+BEGIN_QUOTE
 WP - Here you go!
 #+END_QUOTE
 
 ** =example.com/category/wordpress-theming=
+   :PROPERTIES:
+   :CUSTOM_ID: request-category
+   :END:
+
 #+BEGIN_QUOTE
 Me - Yo, WP! Can I have all of the posts in the "WordPress Theming" category?
+#+END_QUOTE
+#+BEGIN_QUOTE
 WP - Here's all of them. As you wish!
 #+END_QUOTE
 
 ** =example.com/level-up-your-command-line-skills=
+   :PROPERTIES:
+   :CUSTOM_ID: request-single-post
+   :END:
+
 #+BEGIN_QUOTE
 Me - Do you have a post with a slug of "level-up-your-command-line-skills"?
+#+END_QUOTE
+#+BEGIN_QUOTE
 WP - I sure do!
 #+END_QUOTE
 
 ** =example.com/foo-bar=
+   :PROPERTIES:
+   :CUSTOM_ID: request-404
+   :END:
+
 #+BEGIN_QUOTE
 Me - Ok, ok. But do you have one with a slug of "foo-bar"?
+#+END_QUOTE
+#+BEGIN_QUOTE
 WP - Hmmm. Nope. 404!
 #+END_QUOTE
 
 ** Remember
    - The query is a *request* from the browser to the server
    - The theme tells the server what the *response* looks like
-
-* What Makes a Theme?
-** Controls the /presentation/ of content
-** Any theme you create should not add critical functionality
-  - Move critical features to plugins 
-  - You should be able to change the appearance of the site without losing functionality
 
 * Registering a theme with WordPress
 ** Required files for a WP theme
@@ -118,7 +142,7 @@ WP - Hmmm. Nope. 404!
    - Describes the theme to WordPress
    - Allows WordPress to "Activate" the theme in the Admin
 
-*** Example
+*** =style.css=
 #+BEGIN_SRC css
 /**
  * Theme Name: Intro to Theme Development
@@ -141,7 +165,7 @@ WP - Hmmm. Nope. 404!
 ** =index.php=
    - Defines the markup used on the page
    - This is the catch-all template that will be used if a more specific template isn't found
-*** Example
+*** =index.php=
 #+BEGIN_SRC php
 <!DOCTYPE html>
 <html lang="en">
@@ -273,7 +297,8 @@ if ( have_posts() ) {
     :END:
 
 ** You might notice...
-   - There's not a lot going on in the =head= of the page. What about SEO?
+   - There's not a lot going on in the =head= of the page. 
+   - What about SEO?
    - Where's our stylesheet? What about javascript files?
 
 * Hooks: Actions and Filters
@@ -341,15 +366,15 @@ function wp_footer() {
    - [[https://developer.wordpress.org/reference/functions/wp_footer/][Developer - =wp_footer()=]]
 
 ** Actions and Filters Documentation
-   - https://codex.wordpress.org/Plugin_API
+   - [[https://codex.wordpress.org/Plugin_API][Codex - Plugin API]]
 
 * Enqueueing Assets
 ** =functions.php=
 ** 
   #+BEGIN_SRC
 └── pp-theme-name
-  ├── style.css
   ├── functions.php
+  ├── style.css
   ├── index.php
   └── js/
     └── example.js
