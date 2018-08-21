@@ -66,6 +66,16 @@ body {
 .reveal h1 {
   text-shadow: none; }
 
+.reveal h1 code,
+.reveal h2 code,
+.reveal h3 code,
+.reveal h4 code,
+.reveal h5 code,
+.reveal h6 code {
+    font-size: .5em;
+    white-space: nowrap;
+}
+
 /*********************************************
  * OTHER
  *********************************************/
@@ -148,6 +158,10 @@ body {
   word-wrap: break-word;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
 
+.reveal pre.example {
+	padding: 5px;
+}
+
 .reveal code {
   font-family: monospace;
   text-transform: none; }
@@ -159,11 +173,15 @@ body {
   max-height: 400px;
   word-wrap: normal; }
 
-.org-src-container pre {
+.org-src-container pre,
+.reveal pre.example {
   background: rgb(63, 63, 63);
-	padding: 1.5em; }
+  padding: 1.5em;
+  overflow-x: scroll;
+}
 
 /* Credit links */
+.reveal ul + ul,
 .org-src-container + ul {
     font-size: 0.8em;
     position: fixed;
@@ -275,59 +293,21 @@ body {
  * CUSTOM SLIDES
  *********************************************/
 
-#slide-title ul {
-    display: block;
-    list-style-type: none;
-    margin: 3em auto 1em;;
-    font-size: .875em;
+/* me and wp dialogue */
+#slide-request-homepage blockquote,
+#slide-request-contact blockquote,
+#slide-request-category blockquote,
+#slide-request-single-post blockquote,
+#slide-request-404 blockquote {
+	border-left: 4px solid;
 }
 
-#slide-installing-local-01,
-#slide-installing-local-02,
-#slide-installing-local-03,
-#slide-installing-local-04,
-#slide-local-parts-01,
-#slide-local-parts-02,
-#slide-local-parts-03,
-#slide-local-parts-04,
-#slide-creating-site-01,
-#slide-creating-site-02 {
-    width: 45%;
-    margin-left: 0px;
-    font-size: .75em;
-    color: black;
-}
-#slide-installing-local-01 h3,
-#slide-installing-local-02 h3,
-#slide-installing-local-03 h3,
-#slide-installing-local-04 h3,
-#slide-local-parts-01 h3,
-#slide-local-parts-02 h3,
-#slide-local-parts-03 h3,
-#slide-local-parts-04 h3,
-#slide-creating-site-01 h3,
-#slide-creating-site-02 h3 {
-    color: black;
+#slide-request-homepage blockquote + blockquote,
+#slide-request-contact blockquote + blockquote,
+#slide-request-category blockquote + blockquote,
+#slide-request-single-post blockquote + blockquote,
+#slide-request-404 blockquote + blockquote {
+	border-left: none;
+	border-right: 4px solid;
 }
 
-#slide-local-parts-01,
-#slide-local-parts-02,
-#slide-local-parts-03,
-#slide-local-parts-04 {
-    margin-top: 80px;
-}
-
-#slide-local-parts-01 h3,
-#slide-local-parts-02 h3,
-#slide-local-parts-03 h3,
-#slide-local-parts-04 h3 {
-    font-size: 1.85em;
-}
-
-#slide-im-a-developer {
-    width: 300%;
-    margin-left: -100%;
-    background-color: rgba(0,0,0,.875);
-    padding-top: 2em;
-    padding-bottom: 2em;
-}
