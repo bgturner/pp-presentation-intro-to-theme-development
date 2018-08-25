@@ -3,23 +3,40 @@
 #+REVEAL_TRANS: Fade
 #+REVEAL_THEME: none
 #+REVEAL_EXTRA_CSS: assets/styles.css
+#+REVEAL_PLUGINS-deactivate: (highlight)
+#+REVEAL_EXTRA_CSS: vendor/highlight/styles/solarized-light.css
+#+REVEAL_EXTRA_JS: { src: 'vendor/highlight/highlight.pack.js', callback: function() { var allPre, i, j; allPre = document.getElementsByTagName("pre"); for (i = 0, j = allPre.length; i < j; i++) {hljs.highlightBlock(allPre[i]);} }, condition: function() {return true; } }
 #+REVEAL_DEFAULT_SLIDE_BACKGROUND_SIZE: 1400px
 #+REVEAL_HLEVEL: 1
 #+TITLE: Intro to Theme Development
 #+Author: Benjamin Turner
-
-* Summary
-  Creating and working with WordPress themes is a great way to learn more about WordPress as well as make your site look and function exactly how you want.
-
-  We'll go over what goes into making a WordPress theme, as well as concepts like "the loop," "actions and filters," and the "template hierarchy."
-
-  By the end of the talk, you should have a good overview of WordPress themes, as well as places to go for further learning.
-
+#     
+# * Summary
+#   Creating and working with WordPress themes is a great way to learn more about WordPress as well as make your site look and function exactly how you want.
+# 
+#   We'll go over what goes into making a WordPress theme, as well as concepts like "the loop," "actions and filters," and the "template hierarchy."
+# 
+#   By the end of the talk, you should have a good overview of WordPress themes, as well as places to go for further learning.
+# 
 * Intro to WordPress Theme Development
 
   - Benjamin Turner
   - [[https://passionsplay.com][https://passionsplay.com]]
   - [[https://github.com/bgturner]]
+
+
+  - https://bgturner.github.io/pp-presentation-intro-to-theme-development/
+
+* 
+  - Query
+  - The Loop
+  - Hooks
+  - Enqueueing Assets
+  - Template Files
+  - Template Hierarchy
+
+
+  - [[https://developer.wordpress.org/themes/][WordPress Theme Development Handbook]]
 
 * What's a WebPage?
 ** HTML
@@ -54,12 +71,8 @@ $( document ).ready(function() {
 
 ** We know what a Webpage is.
 #+BEGIN_QUOTE
-I go to this link to get what I want.
+If I go to this link I get the content I want.
 #+END_QUOTE
-
-** Could we say?
-  - A single source of truth 
-  - A place that a url links to for unique information
 
 * Query
 ** How we ask WordPress for content
@@ -101,18 +114,6 @@ Me - Yo, WP! Can I have all of the posts in the "WordPress Theming" category?
 WP - Here's all of them. As you wish!
 #+END_QUOTE
 
-** =example.com/level-up-your-command-line-skills=
-   :PROPERTIES:
-   :CUSTOM_ID: request-single-post
-   :END:
-
-#+BEGIN_QUOTE
-Me - Do you have a post with a slug of "level-up-your-command-line-skills"?
-#+END_QUOTE
-#+BEGIN_QUOTE
-WP - I sure do!
-#+END_QUOTE
-
 ** =example.com/foo-bar=
    :PROPERTIES:
    :CUSTOM_ID: request-404
@@ -146,7 +147,7 @@ WP - Hmmm. Nope. 404!
 #+BEGIN_SRC css
 /**
  * Theme Name: Intro to Theme Development
- * Theme URI: https://github.com/passionsplay
+ * Theme URI: https://github.com/passionsplay/example-intro-to-theme-development
  * Author: Benjamin Turner
  * Author URI: https://passionsplay.com
  * Description: An example WordPress theme to accompany a WordCamp talk.
@@ -191,15 +192,12 @@ WP - Hmmm. Nope. 404!
    :END:
 
 * The Loop
-  - The the previous code is the bare minimum for a theme but it isn't dynamic
-  - If we had wanted only static content, we wouldn't be using a CMS like WordPress
-** What is "The Loop?"
-   - The Loop is the way in which our theme can start to display dynamic pieces of content that we write in the WP admin
-   
-- [[https://developer.wordpress.org/themes/basics/the-loop/][Developer Handbook - The Loop]]
+  - How WordPress displays the posts from a query
 
-** But How do we write this?
-*** 
+   
+  - [[https://developer.wordpress.org/themes/basics/the-loop/][Developer Handbook - The Loop]]
+
+** 
 #+BEGIN_SRC php
 <?php
 if ( have_posts() ) {
@@ -214,7 +212,7 @@ if ( have_posts() ) {
 ?>
 #+END_SRC
 
-*** 
+** 
 #+BEGIN_SRC php
 <?php if ( have_posts() ) : ?>
     <?php while ( have_posts() ) : the_post(); ?>
@@ -224,7 +222,7 @@ if ( have_posts() ) {
     <?php endwhile; ?>
 <?php endif; ?>
 #+END_SRC
-*** 
+** =index.php=
 #+BEGIN_SRC php
 <!DOCTYPE html>
 <html lang="en">
@@ -246,70 +244,81 @@ if ( have_posts() ) {
 </html>
 #+END_SRC
 
-*** 
-    :PROPERTIES:
-    :reveal_background: assets/images/theme-dev-frontend-001.png
-    :END:
+** 
+   :PROPERTIES:
+   :reveal_background: assets/images/theme-dev-frontend-001.png
+   :END:
 
-** How do we get the content set in the WP Admin?
-*** Template Tags
-   - =the_title()=
-   - =the_permalink()=
-   - =the_content()=
-   - ... lots more! ...
+** 
+   :PROPERTIES:
+   :reveal_background: assets/images/theme-dev-backend-edit-post.png
+   :END:
 
-   - [[https://codex.wordpress.org/Template_Tags][WordPress Codex - Template Tags]]
+** Template Tags
+  - =the_title()=
+  - =the_permalink()=
+  - =the_content()=
+  - ... lots more ...
 
-** What does a more fleshed out template look like?
-*** 
-  #+BEGIN_SRC php
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-	  <meta charset="UTF-8">
-	  <title>Intro to WP Theme Dev</title>
-  </head>
-  <body>
-	  <h1>Intro to WP Theme Dev</h1>
-	  <?php
-	  if ( have_posts() ) {
-		  while ( have_posts() ) {
-		  the_post(); ?>
-		  <article>
-			  <h2>
-				  <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-			  </h2>
-			  <div>
-				  <?php the_content(); ?>
-			  </div>
-		  </article>
-		  <?php
-		  }
-	  }
-	  ?>
-  </body>
-  </html>
-  #+END_SRC
 
-*** 
-    :PROPERTIES:
-    :reveal_background: assets/images/theme-dev-frontend-002.png
-    :END:
+  - [[https://codex.wordpress.org/Template_Tags][WordPress Codex - Template Tags]]
+
+** 
+ #+BEGIN_SRC php
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+	 <meta charset="UTF-8">
+	 <title>Intro to WP Theme Dev</title>
+ </head>
+ <body>
+	 <h1>Intro to WP Theme Dev</h1>
+	 <?php
+	 if ( have_posts() ) {
+		 while ( have_posts() ) {
+		 the_post(); ?>
+		 <article>
+			 <h2>
+				 <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+			 </h2>
+			 <div>
+				 <?php the_content(); ?>
+			 </div>
+		 </article>
+		 <?php
+		 }
+	 }
+	 ?>
+ </body>
+ </html>
+ #+END_SRC
+
+** 
+   :PROPERTIES:
+   :reveal_background: assets/images/theme-dev-frontend-002.png
+   :END:
 
 ** You might notice...
    - There's not a lot going on in the =head= of the page. 
    - What about SEO?
-   - Where's our stylesheet? What about javascript files?
+   - Where's our stylesheet? 
+   - What about javascript files?
 
 * Hooks: Actions and Filters
 #+BEGIN_QUOTE
 Allows /other/ code to "do stuff" at a certain place in the code
 #+END_QUOTE
 
+   - [[https://codex.wordpress.org/Plugin_API][Codex - Plugin API]]
+
 ** We need to tell WordPress /where/ in our templates it can /do/ stuff.
-** There are two missing pieces from our theme
+** 
    - =wp_head()=
    - =wp_footer()=
+
+
+   - [[https://developer.wordpress.org/reference/functions/wp_head/][Developer - =wp_head()=]]
+   - [[https://developer.wordpress.org/reference/functions/wp_footer/][Developer - =wp_footer()=]]
 
 ** 
 #+BEGIN_SRC php
@@ -336,40 +345,12 @@ Allows /other/ code to "do stuff" at a certain place in the code
     :reveal_background: assets/images/theme-dev-frontend-003.png
     :END:
 
-** =wp_head()=
-
-#+BEGIN_SRC php
-function wp_head() {
-    /**
-     * Prints scripts or data in the head tag on the front end.
-     *
-     * @since 1.5.0
-     */
-    do_action( 'wp_head' );
-}
-#+END_SRC
-
-   - [[https://developer.wordpress.org/reference/functions/wp_head/][Developer - =wp_head()=]]
-** =wp_footer()=
-
-#+BEGIN_SRC php
-function wp_footer() {
-    /**
-     * Prints scripts or data before the closing body tag on the front end.
-     *
-     * @since 1.5.1
-     */
-    do_action( 'wp_footer' );
-}
-#+END_SRC
-
-   - [[https://developer.wordpress.org/reference/functions/wp_footer/][Developer - =wp_footer()=]]
-
-** Actions and Filters Documentation
-   - [[https://codex.wordpress.org/Plugin_API][Codex - Plugin API]]
-
 * Enqueueing Assets
 ** =functions.php=
+   :PROPERTIES:
+   :CUSTOM_ID: enqueue-assets-functions-php
+   :END:
+
 ** 
   #+BEGIN_SRC
 └── pp-theme-name
@@ -380,7 +361,7 @@ function wp_footer() {
     └── example.js
   #+END_SRC
 
-** 
+** =functions.php=
 #+BEGIN_SRC php
 <?php
 /**
@@ -393,32 +374,29 @@ function pp_theme_dev_scripts() {
 add_action( 'wp_enqueue_scripts', 'pp_theme_dev_scripts' );
 #+END_SRC
 
+   - [[https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts][Developer Hook - =wp_enqueue_scripts=]]
+   - [[https://developer.wordpress.org/reference/functions/wp_enqueue_style/][Developer Function - =wp_enqueue_style()=]]
+   - [[https://developer.wordpress.org/reference/functions/wp_enqueue_script/][Developer Function - =wp_enqueue_script()=]]
+
 ** 
    :PROPERTIES:
    :reveal_background: assets/images/theme-dev-frontend-004.png
    :END:
 
-** 
-   - [[https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts][Developer Hook - =wp_enqueue_scripts=]]
-   - [[https://developer.wordpress.org/reference/functions/wp_enqueue_style/][Developer Function - =wp_enqueue_style()=]]
-   - [[https://developer.wordpress.org/reference/functions/wp_enqueue_script/][Developer Function - =wp_enqueue_script()=]]
-
 * Template Files
-  - [[https://developer.wordpress.org/themes/basics/template-files/][Developer Handbook - Template Files]]
-** Template Files
-   - Define how a site looks
-   - Made up of HTML, Template Tags, and PHP code
+  - Define how a site looks
+  - Made up of HTML, Template Tags, and PHP code
 
-** index.php
-   - The most important template file
-   - A catch-all template that is used if a more specific template can't be found.
+
+  - [[https://developer.wordpress.org/themes/basics/template-files/][Developer Handbook - Template Files]]
+
+** =index.php=
 
 ** Template Partials
-   - A piece of a template that is included within other templates
 
-*** 
-    - =get_header()= --> =header.php=
-    - =get_footer()= --> =footer.php=
+  - =get_header()= --> =header.php=
+  - =get_footer()= --> =footer.php=
+
 *** 
 #+BEGIN_SRC php
 <!DOCTYPE html>
@@ -501,20 +479,27 @@ get_footer();
 
 *** Not much of a change.
     - But we've gained flexibility.
-    - Regions that are common throughout the site are located in one place.
+    - One place to edit the code.
 
 *** Other common partials
   - =get_sidebar()= --> =sidebar.php=
   - =get_search_form()= --> =searchform.php=
   - =get_template_part('content')= --> =content.php=
 
+
+  - [[https://developer.wordpress.org/themes/basics/template-files/#template-partials][Developer - Template Partials]]
+
 * Template Hierarchy
-  - How WordPress knows which template to load
+  - How WordPress determines which template to load
+
 
   - [[https://developer.wordpress.org/themes/basics/template-hierarchy/][Theme Handbook - Template Hierarchy]]
 
-** Remember how each request is a query?
-
+** Each request is a query
+   - =example.com/=
+   - =example.com/contact=
+   - =example.com/category/wordpress-theming=
+   - =example.com/foo-bar=
 ** 
 #+BEGIN_QUOTE
    Sometimes we want to display things in different ways depending on the query.
@@ -523,7 +508,6 @@ get_footer();
 ** Example
    - On the homepage, we only want the title for each post.
    - On single blog posts, we want the post's meta information.
-   - But we want them both to use the same header and footer code.
 
 ** Add Two Templates
   #+BEGIN_SRC
@@ -539,10 +523,7 @@ get_footer();
     └── example.js
   #+END_SRC
 
-** Homepage Template
-   - Use =index.php= as a base
-
-** 
+** =home.php=
 #+BEGIN_SRC php
 <?php get_header(); ?>
 <h1>Intro to Theme Dev - Home</h1>
@@ -561,7 +542,7 @@ if ( have_posts() ) {
 get_footer();
 #+END_SRC
 
-** Single Post Template
+** =single.php=
 #+BEGIN_SRC php
 <?php get_header(); ?>
 <h1>Intro to WP Theme Dev</h1>
@@ -602,20 +583,14 @@ get_footer();
    :reveal_background: assets/images/wp-hierarchy.png
    :END:
 
-   - [[https://developer.wordpress.org/themes/basics/template-hierarchy/][Developer - Template Hierarchy]]
-
 ** Example
-   - We want special treatment for posts that have the category of "Unicorns"
-   - =http://example.com/blog/category/unicorns=
+   - We want special treatment for posts that have the category of "WordPress Themeing"
+   - =http://example.com/category/wordpress-themeing=
 
 ** 
 #+BEGIN_SRC 
 └── pp-theme-name
-  ├── category-unicorns.php
+  ├── category-wordpress-theming.php
   └── ...
 #+END_SRC
-
-* Resources
-  - [[https://developer.wordpress.org/themes/][WordPress Theme Development Handbook]]
-  - [[https://make.wordpress.org/training/handbook/theme-school/][Theme Lessons - Teaching aids for creating themes]]
 
