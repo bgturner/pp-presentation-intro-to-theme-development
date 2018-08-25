@@ -13,6 +13,8 @@
 
 <link rel="stylesheet" href="assets/styles.css"/>
 
+<link rel="stylesheet" href="vendor/highlight/styles/solarized-light.css"/>
+
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
     if( window.location.search.match( /print-pdf/gi ) ) {
@@ -27,27 +29,9 @@
 <body>
 <div class="reveal">
 <div class="slides">
-
 <section>
-<section id="slide-orgbe55e85" data-background-size="1400px">
-<h2 id="orgbe55e85">Summary</h2>
-<p>
-Creating and working with WordPress themes is a great way to learn more about WordPress as well as make your site look and function exactly how you want.
-</p>
-
-<p>
-We'll go over what goes into making a WordPress theme, as well as concepts like "the loop," "actions and filters," and the "template hierarchy."
-</p>
-
-<p>
-By the end of the talk, you should have a good overview of WordPress themes, as well as places to go for further learning.
-</p>
-
-</section>
-</section>
-<section>
-<section id="slide-org2439b03" data-background-size="1400px">
-<h2 id="org2439b03">Intro to WordPress Theme Development</h2>
+<section id="slide-org5246767" data-background-size="1400px">
+<h2 id="org5246767">Intro to WordPress Theme Development</h2>
 <ul>
 <li>Benjamin Turner</li>
 <li><a href="https://passionsplay.com">https://passionsplay.com</a></li>
@@ -55,83 +39,101 @@ By the end of the talk, you should have a good overview of WordPress themes, as 
 
 </ul>
 
-</section>
-</section>
-<section>
-<section id="slide-org068918e" data-background-size="1400px">
-<h2 id="org068918e">What's a WebPage?</h2>
-<div class="outline-text-2" id="text-org068918e">
-</div>
-</section>
-<section id="slide-orgea16e44" data-background-size="1400px">
-<h3 id="orgea16e44">HTML</h3>
-<div class="org-src-container">
 
-<pre  class="src src-html">&lt;<span class="org-keyword">!DOCTYPE</span> html&gt;
-&lt;<span class="org-function-name">html</span> <span class="org-variable-name">lang</span>=<span class="org-string">"en"</span>&gt;
-&lt;<span class="org-function-name">head</span>&gt;
-  &lt;<span class="org-function-name">meta</span> <span class="org-variable-name">charset</span>=<span class="org-string">"UTF-8"</span>&gt;
-  &lt;<span class="org-function-name">title</span>&gt;<span class="org-underline"><span class="org-bold">Intro to WP Theme Dev</span></span>&lt;/<span class="org-function-name">title</span>&gt;
-&lt;/<span class="org-function-name">head</span>&gt;
-&lt;<span class="org-function-name">body</span>&gt;
-  &lt;<span class="org-function-name">h1</span>&gt;<span class="org-underline"><span class="org-bold">Intro to WP Theme Dev</span></span>&lt;/<span class="org-function-name">h1</span>&gt;
-  <span class="org-comment-delimiter">&lt;!-- </span><span class="org-comment">more markup </span><span class="org-comment-delimiter">--&gt;</span>
-&lt;/<span class="org-function-name">body</span>&gt;
-&lt;/<span class="org-function-name">html</span>&gt;
-</pre>
-</div>
-
-</section>
-<section id="slide-org6dfe432" data-background-size="1400px">
-<h3 id="org6dfe432">CSS</h3>
-<div class="org-src-container">
-
-<pre  class="src src-css"><span class="org-css-selector">body </span><span class="org-rainbow-delimiters-depth-1">{</span>
-  <span class="org-css-property">background-color</span>: #<span class="org-highlight-numbers-number">50c6db</span>;
-  <span class="org-css-property">color</span>: white;
-<span class="org-rainbow-delimiters-depth-1">}</span>
-</pre>
-</div>
-
-</section>
-<section id="slide-orgafd8d3a" data-background-size="1400px">
-<h3 id="orgafd8d3a">JS</h3>
-<div class="org-src-container">
-
-<pre  class="src src-javascript">$<span class="org-rainbow-delimiters-depth-1">(</span> document <span class="org-rainbow-delimiters-depth-1">)</span>.ready<span class="org-rainbow-delimiters-depth-1">(</span><span class="org-keyword">function</span><span class="org-rainbow-delimiters-depth-2">()</span> <span class="org-rainbow-delimiters-depth-2">{</span>
-    console.log<span class="org-rainbow-delimiters-depth-3">(</span> <span class="org-string">"ready!"</span> <span class="org-rainbow-delimiters-depth-3">)</span>;
-<span class="org-rainbow-delimiters-depth-2">}</span><span class="org-rainbow-delimiters-depth-1">)</span>;
-</pre>
-</div>
-
-</section>
-<section id="slide-org2e70faa" data-background-size="1400px">
-<h3 id="org2e70faa">We know what a Webpage is.</h3>
-<blockquote nil>
-<p>
-I go to this link to get what I want.
-</p>
-</blockquote>
-
-</section>
-<section id="slide-org611ac74" data-background-size="1400px">
-<h3 id="org611ac74">Could we say?</h3>
 <ul>
-<li>A single source of truth</li>
-<li>A place that a url links to for unique information</li>
+<li><a href="https://bgturner.github.io/pp-presentation-intro-to-theme-development/">https://bgturner.github.io/pp-presentation-intro-to-theme-development/</a></li>
 
 </ul>
 
 </section>
 </section>
 <section>
-<section id="slide-orgb74f981" data-background-size="1400px">
-<h2 id="orgb74f981">Query</h2>
-<div class="outline-text-2" id="text-orgb74f981">
+<section id="slide-orgef28ca5" data-background-size="1400px">
+<h2 id="orgef28ca5"></h2>
+<ul>
+<li>Query</li>
+<li>The Loop</li>
+<li>Hooks</li>
+<li>Enqueueing Assets</li>
+<li>Template Files</li>
+<li>Template Hierarchy</li>
+
+</ul>
+
+
+<ul>
+<li><a href="https://developer.wordpress.org/themes/">WordPress Theme Development Handbook</a></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org2012c7b" data-background-size="1400px">
+<h2 id="org2012c7b">What's a WebPage?</h2>
+<div class="outline-text-2" id="text-org2012c7b">
 </div>
 </section>
-<section id="slide-org2db0bee" data-background-size="1400px">
-<h3 id="org2db0bee">How we ask WordPress for content</h3>
+<section id="slide-org3f8ba0b" data-background-size="1400px">
+<h3 id="org3f8ba0b">HTML</h3>
+<div class="org-src-container">
+
+<pre  class="src src-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Intro to WP Theme Dev&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Intro to WP Theme Dev&lt;/h1&gt;
+  &lt;!-- more markup --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+</section>
+<section id="slide-org414a23d" data-background-size="1400px">
+<h3 id="org414a23d">CSS</h3>
+<div class="org-src-container">
+
+<pre  class="src src-css">body {
+  background-color: #50c6db;
+  color: white;
+}
+</pre>
+</div>
+
+</section>
+<section id="slide-orgafb10e7" data-background-size="1400px">
+<h3 id="orgafb10e7">JS</h3>
+<div class="org-src-container">
+
+<pre  class="src src-javascript">$( document ).ready(function() {
+    console.log( "ready!" );
+});
+</pre>
+</div>
+
+</section>
+<section id="slide-org6cb9132" data-background-size="1400px">
+<h3 id="org6cb9132">We know what a Webpage is.</h3>
+<blockquote nil>
+<p>
+If I go to this link I get the content I want.
+</p>
+</blockquote>
+
+</section>
+</section>
+<section>
+<section id="slide-orgfbf9388" data-background-size="1400px">
+<h2 id="orgfbf9388">Query</h2>
+<div class="outline-text-2" id="text-orgfbf9388">
+</div>
+</section>
+<section id="slide-org697dd24" data-background-size="1400px">
+<h3 id="org697dd24">How we ask WordPress for content</h3>
 <ul>
 <li>We do this by accessing a URL in our browser</li>
 
@@ -139,7 +141,7 @@ I go to this link to get what I want.
 
 </section>
 <section id="slide-request-homepage" data-background-size="1400px">
-<h3 id="request-homepage"><a id="org02b4831"></a><code>example.com/</code></h3>
+<h3 id="request-homepage"><a id="org6fbc867"></a><code>example.com/</code></h3>
 <blockquote nil>
 <p>
 Me - Hey WordPress, give me the homepage for the site.
@@ -153,7 +155,7 @@ WP - Sure thing!
 
 </section>
 <section id="slide-request-contact" data-background-size="1400px">
-<h3 id="request-contact"><a id="org062da00"></a><code>example.com/contact</code></h3>
+<h3 id="request-contact"><a id="org46e3457"></a><code>example.com/contact</code></h3>
 <blockquote nil>
 <p>
 Me - Hello WordPress! May I please have the contact page?
@@ -167,7 +169,7 @@ WP - Here you go!
 
 </section>
 <section id="slide-request-category" data-background-size="1400px">
-<h3 id="request-category"><a id="org62bfe2e"></a><code>example.com/category/wordpress-theming</code></h3>
+<h3 id="request-category"><a id="org73b20b3"></a><code>example.com/category/wordpress-theming</code></h3>
 <blockquote nil>
 <p>
 Me - Yo, WP! Can I have all of the posts in the "WordPress Theming" category?
@@ -180,22 +182,8 @@ WP - Here's all of them. As you wish!
 </blockquote>
 
 </section>
-<section id="slide-request-single-post" data-background-size="1400px">
-<h3 id="request-single-post"><a id="org9c610e1"></a><code>example.com/level-up-your-command-line-skills</code></h3>
-<blockquote nil>
-<p>
-Me - Do you have a post with a slug of "level-up-your-command-line-skills"?
-</p>
-</blockquote>
-<blockquote nil>
-<p>
-WP - I sure do!
-</p>
-</blockquote>
-
-</section>
 <section id="slide-request-404" data-background-size="1400px">
-<h3 id="request-404"><a id="orgf182441"></a><code>example.com/foo-bar</code></h3>
+<h3 id="request-404"><a id="orga1131d7"></a><code>example.com/foo-bar</code></h3>
 <blockquote nil>
 <p>
 Me - Ok, ok. But do you have one with a slug of "foo-bar"?
@@ -208,8 +196,8 @@ WP - Hmmm. Nope. 404!
 </blockquote>
 
 </section>
-<section id="slide-org3c74c2b" data-background-size="1400px">
-<h3 id="org3c74c2b">Remember</h3>
+<section id="slide-org76b3a02" data-background-size="1400px">
+<h3 id="org76b3a02">Remember</h3>
 <ul>
 <li>The query is a <b>request</b> from the browser to the server</li>
 <li>The theme tells the server what the <b>response</b> looks like</li>
@@ -219,13 +207,13 @@ WP - Hmmm. Nope. 404!
 </section>
 </section>
 <section>
-<section id="slide-orgbd64fcc" data-background-size="1400px">
-<h2 id="orgbd64fcc">Registering a theme with WordPress</h2>
-<div class="outline-text-2" id="text-orgbd64fcc">
+<section id="slide-orga7230f3" data-background-size="1400px">
+<h2 id="orga7230f3">Registering a theme with WordPress</h2>
+<div class="outline-text-2" id="text-orga7230f3">
 </div>
 </section>
-<section id="slide-org5ea6539" data-background-size="1400px">
-<h3 id="org5ea6539">Required files for a WP theme</h3>
+<section id="slide-org5d5c3f4" data-background-size="1400px">
+<h3 id="org5d5c3f4">Required files for a WP theme</h3>
 <pre  class="example">
 └── pp-theme-name
   ├── style.css
@@ -233,8 +221,8 @@ WP - Hmmm. Nope. 404!
 </pre>
 
 </section>
-<section id="slide-orga1ac59e" data-background-size="1400px">
-<h3 id="orga1ac59e"><code>style.css</code></h3>
+<section id="slide-org9d3a0c3" data-background-size="1400px">
+<h3 id="org9d3a0c3"><code>style.css</code></h3>
 <ul>
 <li>Describes the theme to WordPress</li>
 <li>Allows WordPress to "Activate" the theme in the Admin</li>
@@ -242,338 +230,290 @@ WP - Hmmm. Nope. 404!
 </ul>
 
 </section>
-<section id="slide-orgda85710" data-background-size="1400px">
-<h4 id="orgda85710"><code>style.css</code></h4>
+<section id="slide-org82b497b" data-background-size="1400px">
+<h4 id="org82b497b"><code>style.css</code></h4>
 <div class="org-src-container">
 
-<pre  class="src src-css"><span class="org-comment-delimiter">/**</span>
-<span class="org-comment"> * Theme Name: Intro to Theme Development</span>
-<span class="org-comment"> * Theme URI: https://github.com/passionsplay</span>
-<span class="org-comment"> * Author: Benjamin Turner</span>
-<span class="org-comment"> * Author URI: https://passionsplay.com</span>
-<span class="org-comment"> * Description: An example WordPress theme to accompany a WordCamp talk.</span>
-<span class="org-comment"> * Version: 1.0</span>
-<span class="org-comment"> * Text Domain: pp-theme-dev</span>
-<span class="org-comment"> *</span>
-<span class="org-comment"> * License: GNU General Public License v2 or later</span>
-<span class="org-comment"> * License URI: http://www.gnu.org/licenses/gpl-2.0.html</span>
-<span class="org-comment"> * Tags: simple, example</span>
-<span class="org-comment"> *</span>
-<span class="org-comment"> * This theme, like WordPress, is licensed under the GPL.</span>
-<span class="org-comment"> * Use it to make something cool, have fun, and share what you've learned with others.</span>
-<span class="org-comment"> </span><span class="org-comment-delimiter">*/</span>
+<pre  class="src src-css">/**
+ * Theme Name: Intro to Theme Development
+ * Theme URI: https://github.com/passionsplay/example-intro-to-theme-development
+ * Author: Benjamin Turner
+ * Author URI: https://passionsplay.com
+ * Description: An example WordPress theme to accompany a WordCamp talk.
+ * Version: 1.0
+ * Text Domain: pp-theme-dev
+ *
+ * License: GNU General Public License v2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Tags: simple, example
+ *
+ * This theme, like WordPress, is licensed under the GPL.
+ * Use it to make something cool, have fun, and share what you've learned with others.
+ */
 </pre>
 </div>
 
 </section>
-<section id="slide-org05219bf" data-background-size="1400px">
-<h3 id="org05219bf"><code>index.php</code></h3>
+<section id="slide-orge08510b" data-background-size="1400px">
+<h3 id="orge08510b"><code>index.php</code></h3>
 <ul>
 <li>Defines the markup used on the page</li>
 <li>This is the catch-all template that will be used if a more specific template isn't found</li>
 
 </ul>
 </section>
-<section id="slide-orge30b6b1" data-background-size="1400px">
-<h4 id="orge30b6b1"><code>index.php</code></h4>
+<section id="slide-org4de7fb6" data-background-size="1400px">
+<h4 id="org4de7fb6"><code>index.php</code></h4>
 <div class="org-src-container">
 
-<pre  class="src src-php">&lt;<span class="org-negation-char">!</span><span class="org-php-constant">DOCTYPE</span> html&gt;
-&lt;html lang=<span class="org-php-string">"en"</span>&gt;
+<pre  class="src src-php">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
 &lt;head&gt;
-  &lt;meta charset=<span class="org-php-string">"UTF-8"</span>&gt;
-  &lt;title&gt;Intro to <span class="org-php-constant">WP</span> Theme Dev&lt;/title&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Intro to WP Theme Dev&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;h1&gt;Intro to <span class="org-php-constant">WP</span> Theme Dev&lt;/h1&gt;
-  &lt;<span class="org-negation-char">!</span>-- more markup --&gt;
+  &lt;h1&gt;Intro to WP Theme Dev&lt;/h1&gt;
+  &lt;!-- more markup --&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
 </div>
 
 </section>
-<section id="slide-orgdb2cefa" data-background="assets/images/theme-dev-backend-001.png" data-background-size="1400px">
-<h3 id="orgdb2cefa"></h3>
+<section id="slide-orgc7be313" data-background="assets/images/theme-dev-backend-001.png" data-background-size="1400px">
+<h3 id="orgc7be313"></h3>
 
 </section>
-<section id="slide-orge99fd35" data-background="assets/images/theme-dev-frontend-001.png" data-background-size="1400px">
-<h3 id="orge99fd35"></h3>
+<section id="slide-org648a731" data-background="assets/images/theme-dev-frontend-001.png" data-background-size="1400px">
+<h3 id="org648a731"></h3>
 
 </section>
 </section>
 <section>
-<section id="slide-orgfc4400f" data-background-size="1400px">
-<h2 id="orgfc4400f">The Loop</h2>
+<section id="slide-org497effe" data-background-size="1400px">
+<h2 id="org497effe">The Loop</h2>
 <ul>
-<li>The the previous code is the bare minimum for a theme but it isn't dynamic</li>
-<li>If we had wanted only static content, we wouldn't be using a CMS like WordPress</li>
+<li>How WordPress displays the posts from a query</li>
 
 </ul>
-</section>
-<section id="slide-org6eb4017" data-background-size="1400px">
-<h3 id="org6eb4017">What is "The Loop?"</h3>
-<ul>
-<li>The Loop is the way in which our theme can start to display dynamic pieces of content that we write in the WP admin</li>
 
-</ul>
+
 <ul>
 <li><a href="https://developer.wordpress.org/themes/basics/the-loop/">Developer Handbook - The Loop</a></li>
 
 </ul>
 
 </section>
-<section id="slide-orgac69696" data-background-size="1400px">
-<h3 id="orgac69696">But How do we write this?</h3>
-<div class="outline-text-3" id="text-orgac69696">
-</div>
-</section>
-<section id="slide-orgac16f7c" data-background-size="1400px">
-<h4 id="orgac16f7c"></h4>
+<section id="slide-org56aa1e0" data-background-size="1400px">
+<h3 id="org56aa1e0"></h3>
 <div class="org-src-container">
 
-<pre  class="src src-php"><span class="org-php-php-tag">&lt;?php</span>
-<span class="org-php-keyword">if</span> <span class="org-rainbow-delimiters-depth-1">(</span> have_posts<span class="org-rainbow-delimiters-depth-2">()</span> <span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span>
-  <span class="org-comment-delimiter">// </span><span class="org-comment">Do something if posts in the Query</span>
-  <span class="org-php-keyword">while</span> <span class="org-rainbow-delimiters-depth-2">(</span> have_posts<span class="org-rainbow-delimiters-depth-3">()</span> <span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">{</span>
-    the_post<span class="org-rainbow-delimiters-depth-3">()</span>;
-    <span class="org-comment-delimiter">// </span><span class="org-comment">Do something for each post in the Query</span>
-  <span class="org-rainbow-delimiters-depth-2">}</span>
-<span class="org-rainbow-delimiters-depth-1">}</span> <span class="org-php-keyword">else</span> <span class="org-rainbow-delimiters-depth-1">{</span>
-  <span class="org-comment-delimiter">// </span><span class="org-comment">Do something if no posts in the Query</span>
-<span class="org-rainbow-delimiters-depth-1">}</span>
-<span class="org-php-php-tag">?&gt;</span>
+<pre  class="src src-php">&lt;?php
+if ( have_posts() ) {
+  // Do something if posts in the Query
+  while ( have_posts() ) {
+    the_post();
+    // Do something for each post in the Query
+  }
+} else {
+  // Do something if no posts in the Query
+}
+?&gt;
 </pre>
 </div>
 
 </section>
-<section id="slide-org051b251" data-background-size="1400px">
-<h4 id="org051b251"></h4>
+<section id="slide-org725a19e" data-background-size="1400px">
+<h3 id="org725a19e"></h3>
 <div class="org-src-container">
 
-<pre  class="src src-php"><span class="org-php-php-tag">&lt;?php</span> <span class="org-php-keyword">if</span> <span class="org-rainbow-delimiters-depth-1">(</span> have_posts<span class="org-rainbow-delimiters-depth-2">()</span> <span class="org-rainbow-delimiters-depth-1">)</span> : <span class="org-php-php-tag">?&gt;</span>
-<span class="org-php-php-tag">    &lt;?php</span> <span class="org-php-keyword">while</span> <span class="org-rainbow-delimiters-depth-1">(</span> have_posts<span class="org-rainbow-delimiters-depth-2">()</span> <span class="org-rainbow-delimiters-depth-1">)</span> : the_post<span class="org-rainbow-delimiters-depth-1">()</span>; <span class="org-php-php-tag">?&gt;</span>
+<pre  class="src src-php">&lt;?php if ( have_posts() ) : ?&gt;
+    &lt;?php while ( have_posts() ) : the_post(); ?&gt;
 
-      &lt;p&gt;Slightly more <span class="org-php-constant">HTML</span>-y&lt;/p&gt;
+      &lt;p&gt;Slightly more HTML-y&lt;/p&gt;
 
-<span class="org-php-php-tag">    &lt;?php</span> <span class="org-php-keyword">endwhile</span>; <span class="org-php-php-tag">?&gt;</span>
-<span class="org-php-php-tag">&lt;?php</span> <span class="org-php-keyword">endif</span>; <span class="org-php-php-tag">?&gt;</span>
+    &lt;?php endwhile; ?&gt;
+&lt;?php endif; ?&gt;
 </pre>
 </div>
 </section>
-<section id="slide-orgc876ea2" data-background-size="1400px">
-<h4 id="orgc876ea2"></h4>
+<section id="slide-orgf92a495" data-background-size="1400px">
+<h3 id="orgf92a495"><code>index.php</code></h3>
 <div class="org-src-container">
 
-<pre  class="src src-php">&lt;<span class="org-negation-char">!</span><span class="org-php-constant">DOCTYPE</span> html&gt;
-&lt;html lang=<span class="org-php-string">"en"</span>&gt;
+<pre  class="src src-php">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
 &lt;head&gt;
-  &lt;meta charset=<span class="org-php-string">"UTF-8"</span>&gt;
-  &lt;title&gt;Intro to <span class="org-php-constant">WP</span> Theme Dev&lt;/title&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Intro to WP Theme Dev&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;h1&gt;Intro to <span class="org-php-constant">WP</span> Theme Dev&lt;/h1&gt;
-<span class="org-php-php-tag">  &lt;?php</span>
-  <span class="org-php-keyword">if</span> <span class="org-rainbow-delimiters-depth-1">(</span> have_posts<span class="org-rainbow-delimiters-depth-2">()</span> <span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span>
-    <span class="org-php-keyword">while</span> <span class="org-rainbow-delimiters-depth-2">(</span> have_posts<span class="org-rainbow-delimiters-depth-3">()</span> <span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">{</span>
-      the_post<span class="org-rainbow-delimiters-depth-3">()</span>;
-    <span class="org-rainbow-delimiters-depth-2">}</span>
-  <span class="org-rainbow-delimiters-depth-1">}</span> <span class="org-php-keyword">else</span> <span class="org-rainbow-delimiters-depth-1">{</span>
-  <span class="org-rainbow-delimiters-depth-1">}</span>
-  <span class="org-php-php-tag">?&gt;</span>
+  &lt;h1&gt;Intro to WP Theme Dev&lt;/h1&gt;
+  &lt;?php
+  if ( have_posts() ) {
+    while ( have_posts() ) {
+      the_post();
+    }
+  } else {
+  }
+  ?&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
 </div>
 
 </section>
-<section id="slide-orgb5fd1c6" data-background="assets/images/theme-dev-frontend-001.png" data-background-size="1400px">
-<h4 id="orgb5fd1c6"></h4>
+<section id="slide-org10d516f" data-background="assets/images/theme-dev-frontend-001.png" data-background-size="1400px">
+<h3 id="org10d516f"></h3>
 
 </section>
-<section id="slide-orge462d55" data-background-size="1400px">
-<h3 id="orge462d55">How do we get the content set in the WP Admin?</h3>
-<div class="outline-text-3" id="text-orge462d55">
-</div>
+<section id="slide-org2dce175" data-background="assets/images/theme-dev-backend-edit-post.png" data-background-size="1400px">
+<h3 id="org2dce175"></h3>
+
 </section>
-<section id="slide-org55b3261" data-background-size="1400px">
-<h4 id="org55b3261">Template Tags</h4>
+<section id="slide-org29d11b6" data-background-size="1400px">
+<h3 id="org29d11b6">Template Tags</h3>
 <ul>
 <li><code>the_title()</code></li>
 <li><code>the_permalink()</code></li>
 <li><code>the_content()</code></li>
-<li>&#x2026; lots more! &#x2026;</li>
+<li>&#x2026; lots more &#x2026;</li>
 
+</ul>
+
+
+<ul>
 <li><a href="https://codex.wordpress.org/Template_Tags">WordPress Codex - Template Tags</a></li>
 
 </ul>
 
 </section>
-<section id="slide-orgc8f2439" data-background-size="1400px">
-<h3 id="orgc8f2439">What does a more fleshed out template look like?</h3>
-<div class="outline-text-3" id="text-orgc8f2439">
-</div>
-</section>
-<section id="slide-orgcf4d4e9" data-background-size="1400px">
-<h4 id="orgcf4d4e9"></h4>
+<section id="slide-org3570063" data-background-size="1400px">
+<h3 id="org3570063"></h3>
 <div class="org-src-container">
 
-<pre  class="src src-php">&lt;<span class="org-negation-char">!</span><span class="org-php-constant">DOCTYPE</span> html&gt;
-&lt;html lang=<span class="org-php-string">"en"</span>&gt;
+<pre  class="src src-php">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
 &lt;head&gt;
-  &lt;meta charset=<span class="org-php-string">"UTF-8"</span>&gt;
-  &lt;title&gt;Intro to <span class="org-php-constant">WP</span> Theme Dev&lt;/title&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Intro to WP Theme Dev&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;h1&gt;Intro to <span class="org-php-constant">WP</span> Theme Dev&lt;/h1&gt;
-<span class="org-php-php-tag">  &lt;?php</span>
-  <span class="org-php-keyword">if</span> <span class="org-rainbow-delimiters-depth-1">(</span> have_posts<span class="org-rainbow-delimiters-depth-2">()</span> <span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span>
-    <span class="org-php-keyword">while</span> <span class="org-rainbow-delimiters-depth-2">(</span> have_posts<span class="org-rainbow-delimiters-depth-3">()</span> <span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">{</span>
-    the_post<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>
+  &lt;h1&gt;Intro to WP Theme Dev&lt;/h1&gt;
+  &lt;?php
+  if ( have_posts() ) {
+    while ( have_posts() ) {
+    the_post(); ?&gt;
     &lt;article&gt;
       &lt;h2&gt;
-        &lt;a href=<span class="org-php-string">"&lt;?php the_permalink(); ?&gt;"</span>&gt;<span class="org-php-php-tag">&lt;?php</span> the_title<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>&lt;/a&gt;
+        &lt;a href="&lt;?php the_permalink(); ?&gt;"&gt;&lt;?php the_title(); ?&gt;&lt;/a&gt;
       &lt;/h2&gt;
       &lt;div&gt;
-<span class="org-php-php-tag">        &lt;?php</span> the_content<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>
+        &lt;?php the_content(); ?&gt;
       &lt;/div&gt;
     &lt;/article&gt;
-<span class="org-php-php-tag">    &lt;?php</span>
-    <span class="org-rainbow-delimiters-depth-2">}</span>
-  <span class="org-rainbow-delimiters-depth-1">}</span>
-  <span class="org-php-php-tag">?&gt;</span>
+    &lt;?php
+    }
+  }
+  ?&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
 </div>
 
 </section>
-<section id="slide-orgda3d993" data-background="assets/images/theme-dev-frontend-002.png" data-background-size="1400px">
-<h4 id="orgda3d993"></h4>
+<section id="slide-org9edfc45" data-background="assets/images/theme-dev-frontend-002.png" data-background-size="1400px">
+<h3 id="org9edfc45"></h3>
 
 </section>
-<section id="slide-orgae5e9d2" data-background-size="1400px">
-<h3 id="orgae5e9d2">You might notice&#x2026;</h3>
+<section id="slide-org614e261" data-background-size="1400px">
+<h3 id="org614e261">You might notice&#x2026;</h3>
 <ul>
 <li>There's not a lot going on in the <code>head</code> of the page.</li>
 <li>What about SEO?</li>
-<li>Where's our stylesheet? What about javascript files?</li>
+<li>Where's our stylesheet?</li>
+<li>What about javascript files?</li>
 
 </ul>
 
 </section>
 </section>
 <section>
-<section id="slide-orgc6d2371" data-background-size="1400px">
-<h2 id="orgc6d2371">Hooks: Actions and Filters</h2>
+<section id="slide-org82baa2c" data-background-size="1400px">
+<h2 id="org82baa2c">Hooks: Actions and Filters</h2>
 <blockquote nil>
 <p>
 Allows <i>other</i> code to "do stuff" at a certain place in the code
 </p>
 </blockquote>
 
-</section>
-<section id="slide-org040bc0b" data-background-size="1400px">
-<h3 id="org040bc0b">We need to tell WordPress <i>where</i> in our templates it can <i>do</i> stuff.</h3>
-</section>
-<section id="slide-org7990117" data-background-size="1400px">
-<h3 id="org7990117">There are two missing pieces from our theme</h3>
-<ul>
-<li><code>wp_head()</code></li>
-<li><code>wp_footer()</code></li>
-
-</ul>
-
-</section>
-<section id="slide-orgf350fb8" data-background-size="1400px">
-<h3 id="orgf350fb8"></h3>
-<div class="org-src-container">
-
-<pre  class="src src-php">&lt;<span class="org-negation-char">!</span><span class="org-php-constant">DOCTYPE</span> html&gt;
-&lt;html lang=<span class="org-php-string">"en"</span>&gt;
-&lt;head&gt;
-  &lt;meta charset=<span class="org-php-string">"UTF-8"</span>&gt;
-  &lt;title&gt;Intro to <span class="org-php-constant">WP</span> Theme Dev&lt;/title&gt;
-<span class="org-php-php-tag">  &lt;?php</span> wp_head<span class="org-rainbow-delimiters-depth-1">()</span>; <span class="org-php-php-tag">?&gt;</span>
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;h1&gt;Intro to <span class="org-php-constant">WP</span> Theme Dev&lt;/h1&gt;
-<span class="org-php-php-tag">  &lt;?php</span>
-
-  <span class="org-comment-delimiter">// </span><span class="org-comment">the loop</span>
-
-  wp_footer<span class="org-rainbow-delimiters-depth-1">()</span>; <span class="org-php-php-tag">?&gt;</span>
-&lt;/body&gt;
-&lt;/html&gt;
-</pre>
-</div>
-
-</section>
-<section id="slide-orge9dcf85" data-background="assets/images/theme-dev-frontend-003.png" data-background-size="1400px">
-<h3 id="orge9dcf85"></h3>
-
-</section>
-<section id="slide-orgbf4423d" data-background-size="1400px">
-<h3 id="orgbf4423d"><code>wp_head()</code></h3>
-<div class="org-src-container">
-
-<pre  class="src src-php"><span class="org-php-keyword">function</span> <span class="org-php-function-name">wp_head</span><span class="org-rainbow-delimiters-depth-1">()</span> <span class="org-rainbow-delimiters-depth-1">{</span>
-    <span class="org-doc">/**</span>
-<span class="org-doc">     * Prints scripts or data in the head tag on the front end.</span>
-<span class="org-doc">     *</span>
-<span class="org-doc">     * </span><span class="org-doc"><span class="org-php-doc-annotation-tag">@since</span></span><span class="org-doc"> 1.5.0</span>
-<span class="org-doc">     */</span>
-    do_action<span class="org-rainbow-delimiters-depth-2">(</span> <span class="org-php-string">'wp_head'</span> <span class="org-rainbow-delimiters-depth-2">)</span>;
-<span class="org-rainbow-delimiters-depth-1">}</span>
-</pre>
-</div>
-
-<ul>
-<li><a href="https://developer.wordpress.org/reference/functions/wp_head/">Developer - <code>wp_head()</code></a></li>
-
-</ul>
-</section>
-<section id="slide-org1384ab5" data-background-size="1400px">
-<h3 id="org1384ab5"><code>wp_footer()</code></h3>
-<div class="org-src-container">
-
-<pre  class="src src-php"><span class="org-php-keyword">function</span> <span class="org-php-function-name">wp_footer</span><span class="org-rainbow-delimiters-depth-1">()</span> <span class="org-rainbow-delimiters-depth-1">{</span>
-    <span class="org-doc">/**</span>
-<span class="org-doc">     * Prints scripts or data before the closing body tag on the front end.</span>
-<span class="org-doc">     *</span>
-<span class="org-doc">     * </span><span class="org-doc"><span class="org-php-doc-annotation-tag">@since</span></span><span class="org-doc"> 1.5.1</span>
-<span class="org-doc">     */</span>
-    do_action<span class="org-rainbow-delimiters-depth-2">(</span> <span class="org-php-string">'wp_footer'</span> <span class="org-rainbow-delimiters-depth-2">)</span>;
-<span class="org-rainbow-delimiters-depth-1">}</span>
-</pre>
-</div>
-
-<ul>
-<li><a href="https://developer.wordpress.org/reference/functions/wp_footer/">Developer - <code>wp_footer()</code></a></li>
-
-</ul>
-
-</section>
-<section id="slide-orgd8bc6e1" data-background-size="1400px">
-<h3 id="orgd8bc6e1">Actions and Filters Documentation</h3>
 <ul>
 <li><a href="https://codex.wordpress.org/Plugin_API">Codex - Plugin API</a></li>
 
 </ul>
 
 </section>
+<section id="slide-org4b641f8" data-background-size="1400px">
+<h3 id="org4b641f8">We need to tell WordPress <i>where</i> in our templates it can <i>do</i> stuff.</h3>
+</section>
+<section id="slide-org52e493b" data-background-size="1400px">
+<h3 id="org52e493b"></h3>
+<ul>
+<li><code>wp_head()</code></li>
+<li><code>wp_footer()</code></li>
+
+</ul>
+
+
+<ul>
+<li><a href="https://developer.wordpress.org/reference/functions/wp_head/">Developer - <code>wp_head()</code></a></li>
+<li><a href="https://developer.wordpress.org/reference/functions/wp_footer/">Developer - <code>wp_footer()</code></a></li>
+
+</ul>
+
+</section>
+<section id="slide-org3cda12d" data-background-size="1400px">
+<h3 id="org3cda12d"></h3>
+<div class="org-src-container">
+
+<pre  class="src src-php">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Intro to WP Theme Dev&lt;/title&gt;
+  &lt;?php wp_head(); ?&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Intro to WP Theme Dev&lt;/h1&gt;
+  &lt;?php
+
+  // the loop
+
+  wp_footer(); ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+
+</section>
+<section id="slide-orge3ab177" data-background="assets/images/theme-dev-frontend-003.png" data-background-size="1400px">
+<h3 id="orge3ab177"></h3>
+
+</section>
 </section>
 <section>
-<section id="slide-org505c4ec" data-background-size="1400px">
-<h2 id="org505c4ec">Enqueueing Assets</h2>
-<div class="outline-text-2" id="text-org505c4ec">
+<section id="slide-org175c4f1" data-background-size="1400px">
+<h2 id="org175c4f1">Enqueueing Assets</h2>
+<div class="outline-text-2" id="text-org175c4f1">
 </div>
 </section>
-<section id="slide-org371a6a5" data-background-size="1400px">
-<h3 id="org371a6a5"><code>functions.php</code></h3>
+<section id="slide-enqueue-assets-functions-php" data-background-size="1400px">
+<h3 id="enqueue-assets-functions-php"><a id="org4dd19b6"></a><code>functions.php</code></h3>
+
 </section>
-<section id="slide-org8a25edf" data-background-size="1400px">
-<h3 id="org8a25edf"></h3>
+<section id="slide-org943244c" data-background-size="1400px">
+<h3 id="org943244c"></h3>
 <pre  class="example">
 └── pp-theme-name
   ├── functions.php
@@ -584,29 +524,22 @@ Allows <i>other</i> code to "do stuff" at a certain place in the code
 </pre>
 
 </section>
-<section id="slide-org04ec336" data-background-size="1400px">
-<h3 id="org04ec336"></h3>
+<section id="slide-org1a3131f" data-background-size="1400px">
+<h3 id="org1a3131f"><code>functions.php</code></h3>
 <div class="org-src-container">
 
-<pre  class="src src-php"><span class="org-php-php-tag">&lt;?php</span>
-<span class="org-doc">/**</span>
-<span class="org-doc"> * Proper way to enqueue scripts and styles.</span>
-<span class="org-doc"> */</span>
-<span class="org-php-keyword">function</span> <span class="org-php-function-name">pp_theme_dev_scripts</span><span class="org-rainbow-delimiters-depth-1">()</span> <span class="org-rainbow-delimiters-depth-1">{</span>
-    wp_enqueue_style<span class="org-rainbow-delimiters-depth-2">(</span> <span class="org-php-string">'style-name'</span>, get_stylesheet_uri<span class="org-rainbow-delimiters-depth-3">()</span> <span class="org-rainbow-delimiters-depth-2">)</span>;
-    wp_enqueue_script<span class="org-rainbow-delimiters-depth-2">(</span> <span class="org-php-string">'script-name'</span>, get_template_directory_uri<span class="org-rainbow-delimiters-depth-3">()</span> . <span class="org-php-string">'/js/example.js'</span>, <span class="org-php-keyword">array</span><span class="org-rainbow-delimiters-depth-3">(</span><span class="org-php-string">'jquery'</span><span class="org-rainbow-delimiters-depth-3">)</span>, <span class="org-php-string">'1.0.0'</span>, <span class="org-php-constant">true</span> <span class="org-rainbow-delimiters-depth-2">)</span>;
-<span class="org-rainbow-delimiters-depth-1">}</span>
-add_action<span class="org-rainbow-delimiters-depth-1">(</span> <span class="org-php-string">'wp_enqueue_scripts'</span>, <span class="org-php-string">'pp_theme_dev_scripts'</span> <span class="org-rainbow-delimiters-depth-1">)</span>;
+<pre  class="src src-php">&lt;?php
+/**
+ * Proper way to enqueue scripts and styles.
+ */
+function pp_theme_dev_scripts() {
+    wp_enqueue_style( 'style-name', get_stylesheet_uri() );
+    wp_enqueue_script( 'script-name', get_template_directory_uri() . '/js/example.js', array('jquery'), '1.0.0', true );
+}
+add_action( 'wp_enqueue_scripts', 'pp_theme_dev_scripts' );
 </pre>
 </div>
 
-</section>
-<section id="slide-org3172498" data-background="assets/images/theme-dev-frontend-004.png" data-background-size="1400px">
-<h3 id="org3172498"></h3>
-
-</section>
-<section id="slide-org8b4b8d2" data-background-size="1400px">
-<h3 id="org8b4b8d2"></h3>
 <ul>
 <li><a href="https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts">Developer Hook - <code>wp_enqueue_scripts</code></a></li>
 <li><a href="https://developer.wordpress.org/reference/functions/wp_enqueue_style/">Developer Function - <code>wp_enqueue_style()</code></a></li>
@@ -615,161 +548,152 @@ add_action<span class="org-rainbow-delimiters-depth-1">(</span> <span class="org
 </ul>
 
 </section>
+<section id="slide-orgfb8022b" data-background="assets/images/theme-dev-frontend-004.png" data-background-size="1400px">
+<h3 id="orgfb8022b"></h3>
+
+</section>
 </section>
 <section>
-<section id="slide-orgae3890d" data-background-size="1400px">
-<h2 id="orgae3890d">Template Files</h2>
-<ul>
-<li><a href="https://developer.wordpress.org/themes/basics/template-files/">Developer Handbook - Template Files</a></li>
-
-</ul>
-</section>
-<section id="slide-org3d633d8" data-background-size="1400px">
-<h3 id="org3d633d8">Template Files</h3>
+<section id="slide-org0098c4b" data-background-size="1400px">
+<h2 id="org0098c4b">Template Files</h2>
 <ul>
 <li>Define how a site looks</li>
 <li>Made up of HTML, Template Tags, and PHP code</li>
 
 </ul>
 
-</section>
-<section id="slide-org75dd589" data-background-size="1400px">
-<h3 id="org75dd589">index.php</h3>
+
 <ul>
-<li>The most important template file</li>
-<li>A catch-all template that is used if a more specific template can't be found.</li>
+<li><a href="https://developer.wordpress.org/themes/basics/template-files/">Developer Handbook - Template Files</a></li>
 
 </ul>
 
 </section>
-<section id="slide-orgd7f1e5b" data-background-size="1400px">
-<h3 id="orgd7f1e5b">Template Partials</h3>
-<ul>
-<li>A piece of a template that is included within other templates</li>
-
-</ul>
+<section id="slide-org7878510" data-background-size="1400px">
+<h3 id="org7878510"><code>index.php</code></h3>
 
 </section>
-<section id="slide-orgd2995c3" data-background-size="1400px">
-<h4 id="orgd2995c3"></h4>
+<section id="slide-orgd99e506" data-background-size="1400px">
+<h3 id="orgd99e506">Template Partials</h3>
 <ul>
 <li><code>get_header()</code> &#x2013;&gt; <code>header.php</code></li>
 <li><code>get_footer()</code> &#x2013;&gt; <code>footer.php</code></li>
 
 </ul>
+
 </section>
-<section id="slide-org8587285" data-background-size="1400px">
-<h4 id="org8587285"></h4>
+<section id="slide-orgd897a31" data-background-size="1400px">
+<h4 id="orgd897a31"></h4>
 <div class="org-src-container">
 
-<pre  class="src src-php">&lt;<span class="org-negation-char">!</span><span class="org-php-constant">DOCTYPE</span> html&gt;
-&lt;html lang=<span class="org-php-string">"en"</span>&gt;
+<pre  class="src src-php">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
 &lt;head&gt;
-  &lt;meta charset=<span class="org-php-string">"UTF-8"</span>&gt;
-  &lt;title&gt;Intro to <span class="org-php-constant">WP</span> Theme Dev&lt;/title&gt;
-<span class="org-php-php-tag">  &lt;?php</span> wp_head<span class="org-rainbow-delimiters-depth-1">()</span>; <span class="org-php-php-tag">?&gt;</span>
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Intro to WP Theme Dev&lt;/title&gt;
+  &lt;?php wp_head(); ?&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;h1&gt;Intro to <span class="org-php-constant">WP</span> Theme Dev&lt;/h1&gt;
-<span class="org-php-php-tag">  &lt;?php</span>
-  <span class="org-php-keyword">if</span> <span class="org-rainbow-delimiters-depth-1">(</span> have_posts<span class="org-rainbow-delimiters-depth-2">()</span> <span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span>
-    <span class="org-php-keyword">while</span> <span class="org-rainbow-delimiters-depth-2">(</span> have_posts<span class="org-rainbow-delimiters-depth-3">()</span> <span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">{</span>
-    the_post<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>
+  &lt;h1&gt;Intro to WP Theme Dev&lt;/h1&gt;
+  &lt;?php
+  if ( have_posts() ) {
+    while ( have_posts() ) {
+    the_post(); ?&gt;
     &lt;article&gt;
       &lt;h2&gt;
-        &lt;a href=<span class="org-php-string">"&lt;?php the_permalink(); ?&gt;"</span>&gt;<span class="org-php-php-tag">&lt;?php</span> the_title<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>&lt;/a&gt;
+        &lt;a href="&lt;?php the_permalink(); ?&gt;"&gt;&lt;?php the_title(); ?&gt;&lt;/a&gt;
       &lt;/h2&gt;
       &lt;div&gt;
-<span class="org-php-php-tag">        &lt;?php</span> the_content<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>
+        &lt;?php the_content(); ?&gt;
       &lt;/div&gt;
     &lt;/article&gt;
-<span class="org-php-php-tag">    &lt;?php</span>
-    <span class="org-rainbow-delimiters-depth-2">}</span>
-  <span class="org-rainbow-delimiters-depth-1">}</span>
-  wp_footer<span class="org-rainbow-delimiters-depth-1">()</span>; <span class="org-php-php-tag">?&gt;</span>
+    &lt;?php
+    }
+  }
+  wp_footer(); ?&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
 </div>
 
 </section>
-<section id="slide-orgea35772" data-background-size="1400px">
-<h4 id="orgea35772"></h4>
+<section id="slide-org07af4cd" data-background-size="1400px">
+<h4 id="org07af4cd"></h4>
 <p>
 <code>index.php</code>
 </p>
 <div class="org-src-container">
 
-<pre  class="src src-php"><span class="org-php-php-tag">&lt;?php</span> get_header<span class="org-rainbow-delimiters-depth-1">()</span>; <span class="org-php-php-tag">?&gt;</span>
-&lt;h1&gt;Intro to <span class="org-php-constant">WP</span> Theme Dev&lt;/h1&gt;
-<span class="org-php-php-tag">&lt;?php</span>
-<span class="org-php-keyword">if</span> <span class="org-rainbow-delimiters-depth-1">(</span> have_posts<span class="org-rainbow-delimiters-depth-2">()</span> <span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span>
-  <span class="org-php-keyword">while</span> <span class="org-rainbow-delimiters-depth-2">(</span> have_posts<span class="org-rainbow-delimiters-depth-3">()</span> <span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">{</span>
-  the_post<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>
+<pre  class="src src-php">&lt;?php get_header(); ?&gt;
+&lt;h1&gt;Intro to WP Theme Dev&lt;/h1&gt;
+&lt;?php
+if ( have_posts() ) {
+  while ( have_posts() ) {
+  the_post(); ?&gt;
   &lt;article&gt;
     &lt;h2&gt;
-      &lt;a href=<span class="org-php-string">"&lt;?php the_permalink(); ?&gt;"</span>&gt;<span class="org-php-php-tag">&lt;?php</span> the_title<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>&lt;/a&gt;
+      &lt;a href="&lt;?php the_permalink(); ?&gt;"&gt;&lt;?php the_title(); ?&gt;&lt;/a&gt;
     &lt;/h2&gt;
     &lt;div&gt;
-<span class="org-php-php-tag">      &lt;?php</span> the_content<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>
+      &lt;?php the_content(); ?&gt;
     &lt;/div&gt;
   &lt;/article&gt;
-<span class="org-php-php-tag">  &lt;?php</span>
-  <span class="org-rainbow-delimiters-depth-2">}</span>
-<span class="org-rainbow-delimiters-depth-1">}</span>
-get_footer<span class="org-rainbow-delimiters-depth-1">()</span>;
+  &lt;?php
+  }
+}
+get_footer();
 </pre>
 </div>
 
 </section>
-<section id="slide-orgeb93bf0" data-background-size="1400px">
-<h4 id="orgeb93bf0"></h4>
+<section id="slide-org39347c2" data-background-size="1400px">
+<h4 id="org39347c2"></h4>
 <p>
 <code>header.php</code>
 </p>
 <div class="org-src-container">
 
-<pre  class="src src-php">&lt;<span class="org-negation-char">!</span><span class="org-php-constant">DOCTYPE</span> html&gt;
-&lt;html lang=<span class="org-php-string">"en"</span>&gt;
+<pre  class="src src-php">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
 &lt;head&gt;
-  &lt;meta charset=<span class="org-php-string">"UTF-8"</span>&gt;
-  &lt;title&gt;Intro to <span class="org-php-constant">WP</span> Theme Dev&lt;/title&gt;
-<span class="org-php-php-tag">  &lt;?php</span> wp_head<span class="org-rainbow-delimiters-depth-1">()</span>; <span class="org-php-php-tag">?&gt;</span>
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Intro to WP Theme Dev&lt;/title&gt;
+  &lt;?php wp_head(); ?&gt;
 &lt;/head&gt;
 &lt;body&gt;
 </pre>
 </div>
 
 </section>
-<section id="slide-org653971e" data-background-size="1400px">
-<h4 id="org653971e"></h4>
+<section id="slide-org079fea7" data-background-size="1400px">
+<h4 id="org079fea7"></h4>
 <p>
 <code>footer.php</code>
 </p>
 <div class="org-src-container">
 
-<pre  class="src src-php"><span class="org-php-php-tag">  &lt;?php</span> wp_footer<span class="org-rainbow-delimiters-depth-1">()</span>; <span class="org-php-php-tag">?&gt;</span>
+<pre  class="src src-php">  &lt;?php wp_footer(); ?&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
 </div>
 
 </section>
-<section id="slide-orgf494505" data-background="assets/images/theme-dev-frontend-004.png" data-background-size="1400px">
-<h4 id="orgf494505"></h4>
+<section id="slide-org46030db" data-background="assets/images/theme-dev-frontend-004.png" data-background-size="1400px">
+<h4 id="org46030db"></h4>
 
 </section>
-<section id="slide-orgc34aef9" data-background-size="1400px">
-<h4 id="orgc34aef9">Not much of a change.</h4>
+<section id="slide-org4e9a7a1" data-background-size="1400px">
+<h4 id="org4e9a7a1">Not much of a change.</h4>
 <ul>
 <li>But we've gained flexibility.</li>
-<li>Regions that are common throughout the site are located in one place.</li>
+<li>One place to edit the code.</li>
 
 </ul>
 
 </section>
-<section id="slide-org9b2fed3" data-background-size="1400px">
-<h4 id="org9b2fed3">Other common partials</h4>
+<section id="slide-org1352c58" data-background-size="1400px">
+<h4 id="org1352c58">Other common partials</h4>
 <ul>
 <li><code>get_sidebar()</code> &#x2013;&gt; <code>sidebar.php</code></li>
 <li><code>get_search_form()</code> &#x2013;&gt; <code>searchform.php</code></li>
@@ -777,25 +701,41 @@ get_footer<span class="org-rainbow-delimiters-depth-1">()</span>;
 
 </ul>
 
+
+<ul>
+<li><a href="https://developer.wordpress.org/themes/basics/template-files/#template-partials">Developer - Template Partials</a></li>
+
+</ul>
+
 </section>
 </section>
 <section>
-<section id="slide-org62c4787" data-background-size="1400px">
-<h2 id="org62c4787">Template Hierarchy</h2>
+<section id="slide-org3e5ea66" data-background-size="1400px">
+<h2 id="org3e5ea66">Template Hierarchy</h2>
 <ul>
-<li>How WordPress knows which template to load</li>
+<li>How WordPress determines which template to load</li>
 
+</ul>
+
+
+<ul>
 <li><a href="https://developer.wordpress.org/themes/basics/template-hierarchy/">Theme Handbook - Template Hierarchy</a></li>
 
 </ul>
 
 </section>
-<section id="slide-orgc6bb6cf" data-background-size="1400px">
-<h3 id="orgc6bb6cf">Remember how each request is a query?</h3>
+<section id="slide-org5b26a4a" data-background-size="1400px">
+<h3 id="org5b26a4a">Each request is a query</h3>
+<ul>
+<li><code>example.com/</code></li>
+<li><code>example.com/contact</code></li>
+<li><code>example.com/category/wordpress-theming</code></li>
+<li><code>example.com/foo-bar</code></li>
 
+</ul>
 </section>
-<section id="slide-orgb49f2f3" data-background-size="1400px">
-<h3 id="orgb49f2f3"></h3>
+<section id="slide-org947dab7" data-background-size="1400px">
+<h3 id="org947dab7"></h3>
 <blockquote nil>
 <p>
 Sometimes we want to display things in different ways depending on the query.
@@ -803,18 +743,17 @@ Sometimes we want to display things in different ways depending on the query.
 </blockquote>
 
 </section>
-<section id="slide-org54fa87c" data-background-size="1400px">
-<h3 id="org54fa87c">Example</h3>
+<section id="slide-org84628f6" data-background-size="1400px">
+<h3 id="org84628f6">Example</h3>
 <ul>
 <li>On the homepage, we only want the title for each post.</li>
 <li>On single blog posts, we want the post's meta information.</li>
-<li>But we want them both to use the same header and footer code.</li>
 
 </ul>
 
 </section>
-<section id="slide-orgc03bd33" data-background-size="1400px">
-<h3 id="orgc03bd33">Add Two Templates</h3>
+<section id="slide-orgb4e02a4" data-background-size="1400px">
+<h3 id="orgb4e02a4">Add Two Templates</h3>
 <pre  class="example">
 └── pp-theme-name
   ├── home.php
@@ -829,110 +768,87 @@ Sometimes we want to display things in different ways depending on the query.
 </pre>
 
 </section>
-<section id="slide-org190f509" data-background-size="1400px">
-<h3 id="org190f509">Homepage Template</h3>
-<ul>
-<li>Use <code>index.php</code> as a base</li>
-
-</ul>
-
-</section>
-<section id="slide-orgddecca7" data-background-size="1400px">
-<h3 id="orgddecca7"></h3>
+<section id="slide-orgb0a1aea" data-background-size="1400px">
+<h3 id="orgb0a1aea"><code>home.php</code></h3>
 <div class="org-src-container">
 
-<pre  class="src src-php"><span class="org-php-php-tag">&lt;?php</span> get_header<span class="org-rainbow-delimiters-depth-1">()</span>; <span class="org-php-php-tag">?&gt;</span>
+<pre  class="src src-php">&lt;?php get_header(); ?&gt;
 &lt;h1&gt;Intro to Theme Dev - Home&lt;/h1&gt;
-<span class="org-php-php-tag">&lt;?php</span>
-<span class="org-php-keyword">if</span> <span class="org-rainbow-delimiters-depth-1">(</span> have_posts<span class="org-rainbow-delimiters-depth-2">()</span> <span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span>
-  <span class="org-php-keyword">while</span> <span class="org-rainbow-delimiters-depth-2">(</span> have_posts<span class="org-rainbow-delimiters-depth-3">()</span> <span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">{</span>
-  the_post<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>
+&lt;?php
+if ( have_posts() ) {
+  while ( have_posts() ) {
+  the_post(); ?&gt;
   &lt;article&gt;
     &lt;h2&gt;
-      &lt;a href=<span class="org-php-string">"&lt;?php the_permalink(); ?&gt;"</span>&gt;<span class="org-php-php-tag">&lt;?php</span> the_title<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>&lt;/a&gt;
+      &lt;a href="&lt;?php the_permalink(); ?&gt;"&gt;&lt;?php the_title(); ?&gt;&lt;/a&gt;
     &lt;/h2&gt;
   &lt;/article&gt;
-<span class="org-php-php-tag">  &lt;?php</span>
-  <span class="org-rainbow-delimiters-depth-2">}</span>
-<span class="org-rainbow-delimiters-depth-1">}</span>
-get_footer<span class="org-rainbow-delimiters-depth-1">()</span>;
+  &lt;?php
+  }
+}
+get_footer();
 </pre>
 </div>
 
 </section>
-<section id="slide-org76b17fb" data-background-size="1400px">
-<h3 id="org76b17fb">Single Post Template</h3>
+<section id="slide-orgae60d88" data-background-size="1400px">
+<h3 id="orgae60d88"><code>single.php</code></h3>
 <div class="org-src-container">
 
-<pre  class="src src-php"><span class="org-php-php-tag">&lt;?php</span> get_header<span class="org-rainbow-delimiters-depth-1">()</span>; <span class="org-php-php-tag">?&gt;</span>
-&lt;h1&gt;Intro to <span class="org-php-constant">WP</span> Theme Dev&lt;/h1&gt;
-<span class="org-php-php-tag">&lt;?php</span>
-<span class="org-php-keyword">if</span> <span class="org-rainbow-delimiters-depth-1">(</span> have_posts<span class="org-rainbow-delimiters-depth-2">()</span> <span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span>
-  <span class="org-php-keyword">while</span> <span class="org-rainbow-delimiters-depth-2">(</span> have_posts<span class="org-rainbow-delimiters-depth-3">()</span> <span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">{</span>
-  the_post<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>
+<pre  class="src src-php">&lt;?php get_header(); ?&gt;
+&lt;h1&gt;Intro to WP Theme Dev&lt;/h1&gt;
+&lt;?php
+if ( have_posts() ) {
+  while ( have_posts() ) {
+  the_post(); ?&gt;
   &lt;article&gt;
     &lt;h2&gt;
-      &lt;a href=<span class="org-php-string">"&lt;?php the_permalink(); ?&gt;"</span>&gt;<span class="org-php-php-tag">&lt;?php</span> the_title<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>&lt;/a&gt;
+      &lt;a href="&lt;?php the_permalink(); ?&gt;"&gt;&lt;?php the_title(); ?&gt;&lt;/a&gt;
     &lt;/h2&gt;
-    &lt;div <span class="org-php-keyword">class</span>=<span class="org-php-string">"postmeta"</span>&gt;
-      &lt;p&gt;<span class="org-php-php-tag">&lt;?php</span> the_author<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>&lt;/p&gt;
-      &lt;p&gt;<span class="org-php-php-tag">&lt;?php</span> the_date<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>&lt;/p&gt;
+    &lt;div class="postmeta"&gt;
+      &lt;p&gt;&lt;?php the_author(); ?&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;?php the_date(); ?&gt;&lt;/p&gt;
     &lt;/div&gt;
     &lt;div&gt;
-<span class="org-php-php-tag">      &lt;?php</span> the_content<span class="org-rainbow-delimiters-depth-3">()</span>; <span class="org-php-php-tag">?&gt;</span>
+      &lt;?php the_content(); ?&gt;
     &lt;/div&gt;
   &lt;/article&gt;
-<span class="org-php-php-tag">  &lt;?php</span>
-  <span class="org-rainbow-delimiters-depth-2">}</span>
-<span class="org-rainbow-delimiters-depth-1">}</span>
-get_footer<span class="org-rainbow-delimiters-depth-1">()</span>;
+  &lt;?php
+  }
+}
+get_footer();
 </pre>
 </div>
 
 </section>
-<section id="slide-org8b0ee10" data-background="assets/images/theme-dev-frontend-005.png" data-background-size="1400px">
-<h3 id="org8b0ee10"></h3>
+<section id="slide-org878995d" data-background="assets/images/theme-dev-frontend-005.png" data-background-size="1400px">
+<h3 id="org878995d"></h3>
 
 </section>
-<section id="slide-orgad8a3e7" data-background="assets/images/theme-dev-frontend-006.png" data-background-size="1400px">
-<h3 id="orgad8a3e7"></h3>
+<section id="slide-org1321165" data-background="assets/images/theme-dev-frontend-006.png" data-background-size="1400px">
+<h3 id="org1321165"></h3>
 
 </section>
-<section id="slide-orge31dfe2" data-background="assets/images/wp-hierarchy.png" data-background-size="1400px">
-<h3 id="orge31dfe2"></h3>
+<section id="slide-org38da4ef" data-background="assets/images/wp-hierarchy.png" data-background-size="1400px">
+<h3 id="org38da4ef"></h3>
+
+</section>
+<section id="slide-org7a1ace1" data-background-size="1400px">
+<h3 id="org7a1ace1">Example</h3>
 <ul>
-<li><a href="https://developer.wordpress.org/themes/basics/template-hierarchy/">Developer - Template Hierarchy</a></li>
+<li>We want special treatment for posts that have the category of "WordPress Themeing"</li>
+<li><code>http://example.com/category/wordpress-themeing</code></li>
 
 </ul>
 
 </section>
-<section id="slide-org573f6eb" data-background-size="1400px">
-<h3 id="org573f6eb">Example</h3>
-<ul>
-<li>We want special treatment for posts that have the category of "Unicorns"</li>
-<li><code>http://example.com/blog/category/unicorns</code></li>
-
-</ul>
-
-</section>
-<section id="slide-orge7d39c6" data-background-size="1400px">
-<h3 id="orge7d39c6"></h3>
+<section id="slide-org45dce5c" data-background-size="1400px">
+<h3 id="org45dce5c"></h3>
 <pre  class="example">
 └── pp-theme-name
-  ├── category-unicorns.php
+  ├── category-wordpress-theming.php
   └── ...
 </pre>
-
-</section>
-</section>
-<section>
-<section id="slide-orge478353" data-background-size="1400px">
-<h2 id="orge478353">Resources</h2>
-<ul>
-<li><a href="https://developer.wordpress.org/themes/">WordPress Theme Development Handbook</a></li>
-<li><a href="https://make.wordpress.org/training/handbook/theme-school/">Theme Lessons - Teaching aids for creating themes</a></li>
-
-</ul>
 </section>
 </section>
 </div>
@@ -965,6 +881,7 @@ multiplex: {
 
 // Optional libraries used to extend on reveal.js
 dependencies: [
+{ src: 'vendor/highlight/highlight.pack.js', callback: function() { var allPre, i, j; allPre = document.getElementsByTagName("pre"); for (i = 0, j = allPre.length; i < j; i++) {hljs.highlightBlock(allPre[i]);} }, condition: function() {return true; } },
  { src: 'assets/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
  { src: 'assets/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
  { src: 'assets/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },

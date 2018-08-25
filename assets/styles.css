@@ -175,13 +175,14 @@ body {
 
 .org-src-container pre,
 .reveal pre.example {
-  background: rgb(63, 63, 63);
+  /* background: rgb(63, 63, 63); */
   padding: 1.5em;
   overflow-x: scroll;
 }
 
 /* Credit links */
 .reveal ul + ul,
+.reveal blockquote + ul,
 .org-src-container + ul {
     font-size: 0.8em;
     position: fixed;
